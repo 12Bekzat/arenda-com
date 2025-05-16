@@ -14,6 +14,7 @@
     flex-direction: column;
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
 }
 
 .logo {
@@ -31,7 +32,144 @@
 .main {
     width: 100%;
     flex-grow: 1;
-    padding: 50px 12px;
+    padding: 30px 12px;
     display: flex;
     flex-direction: column;
+}
+
+.filter {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 36px;
+
+    &__settings {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        grid-column: 2;
+    }
+
+    &__main {
+        border: 1px solid rgb(224, 224, 224);
+        border-radius: 8px;
+        padding: 12px;
+        display: flex;
+        gap: 12px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__list {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 48px;
+    }
+}
+
+.home {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    gap: 12px;
+
+    &__img {
+        width: 100%;
+        height: 250px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    }
+
+    &__title {
+        font-weight: 600;
+    }
+
+    &__price {
+        font-size: 18px;
+        color: gray;
+
+        & .price {
+            color: black;
+        }
+    }
+}
+
+.details {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 600px 1fr;
+    gap: 36px;
+
+    &__img {
+        width: 100%;
+
+        img {
+            width: 100%;
+            object-fit: cover;
+            border-radius: 32px;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    &__title {
+        font-size: 48px;
+    }
+
+    &__price {
+        font-size: 32px;
+    }
+}
+
+.comment {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 50px;
+}
+
+.review {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0 30px;
+
+    &__author {
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    &__text {
+        width: 100%;
+    }
+
+    &__line {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+
+        i {
+            font-size: 14px;
+            cursor: pointer;
+        }
+    }
+
+    &__subtext {
+        font-size: 14px;
+        color: gray;
+    }
 }

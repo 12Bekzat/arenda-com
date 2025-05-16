@@ -9,15 +9,11 @@
 #app {
   width: 100vw;
   height: 100vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
 }
 
 .logo {
@@ -34,15 +30,129 @@
 
 .main {
   width: 100%;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  padding: 50px 12px;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  flex-grow: 1;
+  padding: 30px 12px;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
+}
+
+.filter {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 36px;
+}
+.filter__settings {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  grid-column: 2;
+}
+.filter__main {
+  border: 1px solid rgb(224, 224, 224);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  align-items: center;
+}
+.filter__list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.home {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  gap: 12px;
+}
+.home__img {
+  width: 100%;
+  height: 250px;
+}
+.home__img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 8px;
+}
+.home__title {
+  font-weight: 600;
+}
+.home__price {
+  font-size: 18px;
+  color: gray;
+}
+.home__price .price {
+  color: black;
+}
+
+.details {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 600px 1fr;
+  gap: 36px;
+}
+.details__img {
+  width: 100%;
+}
+.details__img img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 32px;
+}
+.details__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.details__title {
+  font-size: 48px;
+}
+.details__price {
+  font-size: 32px;
+}
+
+.comment {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 50px;
+}
+
+.review {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 30px;
+}
+.review__author {
+  font-weight: 600;
+  font-size: 14px;
+}
+.review__text {
+  width: 100%;
+}
+.review__line {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.review__line i {
+  font-size: 14px;
+  cursor: pointer;
+}
+.review__subtext {
+  font-size: 14px;
+  color: gray;
 }/*# sourceMappingURL=style.css.map */
