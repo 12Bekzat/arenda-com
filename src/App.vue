@@ -4,6 +4,14 @@ import Header from "./components/Header.vue";
 import { onMounted } from "vue";
 import { updatePrimaryPalette } from "@primevue/themes";
 import AppEventBus from "./app/AppEventBus";
+import Footer from "./components/Footer.vue";
+import { useQuery } from "./composables/useQuery";
+import { useUserStore } from "./stores/userStore";
+import { storeToRefs } from "pinia";
+
+const store = useUserStore()
+const { user, isAuth } = storeToRefs(store)
+const { getMe } = useQuery()
 
 onMounted(async () => {
   const color = {
@@ -25,6 +33,10 @@ onMounted(async () => {
 
   updatePrimaryPalette(color.palette);
   AppEventBus.emit("theme-palette-change");
+
+  if (isAuth.value) {
+    await getMe()
+  }
 });
 </script>
 
@@ -34,4 +46,6 @@ onMounted(async () => {
   <div class="main">
     <RouterView />
   </div>
+
+  <Footer />
 </template>

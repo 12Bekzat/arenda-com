@@ -6,21 +6,33 @@
       </div>
     </template>
     <template #item="{ item, props, hasSubmenu, root }">
-      <a v-ripple class="link" v-bind="props.action">
+      <a v-ripple class="link" v-bind="props.action" v-if="item?.meta?.requireAuth ? isAuth : true && item?.meta?.isAdmin === true ? isCan() : true">
         <RouterLink :to="item?.to" class="link">{{ item.label }}</RouterLink>
       </a>
     </template>
     <template #end>
       <div class="flex items-center gap-2">
-        <SplitButton label="User Name" @click="save" :model="items" severity="secondary" />
+        <SplitButton v-if="isAuth" :label="user?.fullName || 'Not Found'" @click="save" :model="items" severity="secondary" />
+        <Button v-else label="Войти" @click="$router.push({ name: 'Login' })" severity="secondary" />
       </div>
     </template>
   </Menubar>
 </template>
 <script setup>
-import { Avatar, Badge, Menubar, SplitButton } from 'primevue';
+import { useUserStore } from '@/stores/userStore';
+import { storeToRefs } from 'pinia';
+import { Avatar, Badge, Button, Menubar, SplitButton } from 'primevue';
 import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
+
+const store = useUserStore()
+const { isAuth, user, token } = storeToRefs(store)
+
+const isCan = (roleNames = ["ROLE_ADMIN"]) => {
+  console.log('chech role');
+  
+  return user.value?.roles?.find((role) => roleNames.includes(role?.name));
+};
 
 const menuItems = ref([
     {
@@ -36,35 +48,42 @@ const menuItems = ref([
     {
         label: 'Избранное',
         icon: 'pi pi-search',
-        to: '/favorites'
+        to: '/favorites',
+        meta: { requireAuth: true }
     },
     {
-        label: 'Контакты',
+        label: 'Сообщения',
         icon: 'pi pi-search',
-        to: '/contacts'
+        to: '/messages',
+        meta: { requireAuth: true }
+    },
+    {
+        label: 'Панель управления',
+        icon: 'pi pi-search',
+        to: '/admin',
+        meta: { isAdmin: true }
     },
 ]);
 
+const router = useRouter()
+
 const items = [
     {
-        label: 'Update',
+        label: 'Профиль',
         command: () => {
-            toast.add({ severity: 'success', summary: 'Updated', detail: 'Data Updated', life: 3000 });
-        }
-    },
-    {
-        label: 'Delete',
-        command: () => {
-            toast.add({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+            router.push({ name: 'Profile' })
         }
     },
     {
         separator: true
     },
     {
-        label: 'Quit',
+        label: 'Выйти',
         command: () => {
-            window.location.href = 'https://vuejs.org/';
+            isAuth.value = false
+            user.value = {}
+            token.value = {}
+            localStorage.removeItem('jwt_token')
         }
     }
 ];
